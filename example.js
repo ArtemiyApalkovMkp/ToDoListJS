@@ -78,10 +78,10 @@ const render = () => { //создаёт блок с введёнными зад�
     deleteAllButton.addEventListener('click', onClickDeleteAll);
 
     const editImg = document.createElement('img');
-    editImg.src = '/ProjectPics/edit blue.svg';
+    editImg.src = 'ProjectPics/edit blue.svg';
     editImg.className = 'imgs';
     const dltImg = document.createElement('img');
-    dltImg.src = '/ProjectPics/trash-alt.svg';
+    dltImg.src = 'ProjectPics/trash-alt.svg';
     dltImg.className = 'imgs';
     
     editButton.appendChild(editImg);
@@ -128,7 +128,7 @@ const onClickEditButton = (index) => {
   const acceptChangeButton = document.createElement('button');
   acceptChangeButton.className = 'buttons';
   const acceptImg = document.createElement('img');
-  acceptImg.src = '/ProjectPics/check-square.svg';
+  acceptImg.src = 'ProjectPics/check-square.svg';
   acceptImg.className = 'imgs';
   acceptChangeButton.appendChild(acceptImg);
   acceptChangeButton.id = 'change-button';
@@ -136,7 +136,7 @@ const onClickEditButton = (index) => {
   const rejectChangeButton = document.createElement('button');
   rejectChangeButton.className = 'buttons';
   const rejectImg = document.createElement('img');
-  rejectImg.src = '/ProjectPics/times-square.svg';
+  rejectImg.src = 'ProjectPics/times-square.svg';
   rejectImg.className = 'imgs';
   rejectChangeButton.appendChild(rejectImg);
   rejectChangeButton.id = 'reject-button';

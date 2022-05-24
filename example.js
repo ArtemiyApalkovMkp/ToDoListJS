@@ -2,7 +2,7 @@ let allTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let valueInput = '';
 let input = null;
 
-window.onload = function init() {
+window.onload = init = () => {
   input = document.getElementById('add-task');
   input.addEventListener('change', updateValue);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
@@ -25,7 +25,7 @@ const updateValue = (event) => {
   valueInput = event.target.value;
 };
 
-const render = () => { //создаёт блок с введёнными задачами
+const render = () => {
   const content = document.getElementById('content-page');
 
   while(content.firstChild) {
@@ -44,18 +44,15 @@ const render = () => { //создаёт блок с введёнными зад�
     text.innerText = item.text;
     text.className = item.isCheck ? 'text-task done-text' : 'text-task';
     text.id = `text-${index}`;
-    //container.appendChild(text);
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = item.isCheck;
     checkbox.id = 'check-box';
 
-    checkbox.onchange = function () {
+    checkbox.onchange = onChangeFunc = () => {
       onChangeCheckBox(index);
     };
-
-    // container.appendChild(checkbox);
     
     const editButton = document.createElement('button');
     editButton.className = !allTasks[index].isCheck ? 'buttons' : 'buttons non-visible';
@@ -65,11 +62,9 @@ const render = () => { //создаёт блок с введёнными зад�
     deleteButton.id = `dltBut-${index}`;
     const deleteAllButton = document.getElementById('delete-all');
 
-    //!!!
     deleteButton.addEventListener("click", () => {
       onClickDeleteButton(index);
     });
-    //!!!
 
     editButton.addEventListener('click', () => {
       onClickEditButton(index);
@@ -93,20 +88,17 @@ const render = () => { //создаёт блок с введёнными зад�
     panel.appendChild(deleteButton);
 
     container.appendChild(panel);
-    //container.appendChild(deleteButton);
 
     content.appendChild(container);
   });
 }
 
-///!!!
 const onClickDeleteButton = (index) => {
   allTasks.splice(index, 1);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
 
   render();
 };
-///!!!
 
 const onClickDeleteAll = () => {
   allTasks.splice(0, allTasks.length);
@@ -166,15 +158,9 @@ const onClickEditButton = (index) => {
   })
 }
 
-const acceptChangeButton = document.getElementById('change-button');
-
-
-
 const onChangeCheckBox = (index) => {
   allTasks[index].isCheck = !allTasks[index].isCheck;
   localStorage.setItem('tasks', JSON.stringify(allTasks));
-
-  // allTasks[index].isCheck ?  'ed-but-true'
 
   if (allTasks[index].isCheck) {
     document.getElementById(`edBut-${index}`).className = 'buttons non-visible';

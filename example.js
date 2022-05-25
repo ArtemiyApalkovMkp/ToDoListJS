@@ -81,7 +81,7 @@ const render = () => {
     });
 
     editButton.addEventListener('click', () => {
-      onClickEditButton(index);
+      onClickEditButton(index, item.id);
     })
 
     deleteAllButton.addEventListener('click', onClickDeleteAll);
@@ -124,7 +124,7 @@ const onClickDeleteAll = async () => {
   render();
 }
 
-const onClickEditButton = (index) => {
+const onClickEditButton = (index, id) => {
   const editBlock = document.createElement('div');
   editBlock.id = 'edit-block';
 
@@ -157,12 +157,27 @@ const onClickEditButton = (index) => {
   const hidenBlock = document.getElementById(`panel-${index}`);
   hidenBlock.style.display = 'none';
 
-  acceptChangeButton.addEventListener('click', () => {
+  acceptChangeButton.addEventListener('click', async () => {
     allTasks[index].text = editTextField.value;
     localStorage.setItem('tasks', JSON.stringify(allTasks));
 
     editBlock.remove();
     hidenBlock.style.display = '';
+
+    const response = await fetch(`http://localhost:8000/updateTask`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json;charset=utf-8',
+        'Access-control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({
+        text: editTextField.value,
+        isCheck: false,
+        id
+      })
+    });
+    const result = await response.json();
+    allTasks = result.data;
 
     render();
   })

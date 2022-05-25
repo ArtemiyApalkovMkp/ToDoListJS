@@ -27,7 +27,7 @@ const onClickButton = async () => {
     })
   });
 
-  let result = await response.json();
+  const result = await response.json();
   allTasks = result.data;
   localStorage.setItem('tasks', JSON.stringify(allTasks));
   valueInput = '';
@@ -113,7 +113,7 @@ const onClickDeleteButton = async (index, id) => {
   const response = await fetch(`http://localhost:8000/deleteTask?id=${id}`, {
     method: 'DELETE',
   });
-  let result = await response.json();
+  const result = await response.json();
   allTasks = result.data;
   render();
 };

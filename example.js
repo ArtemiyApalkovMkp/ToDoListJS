@@ -15,11 +15,6 @@ window.onload = init = async () => {
 };
 
 const onClickButton = async () => {
-  allTasks.push({
-    text: valueInput,
-    isCheck: false,
-  });
-
   const response = await fetch('http://localhost:8000/createTask', {
     method: 'POST',
     headers: {
@@ -32,9 +27,8 @@ const onClickButton = async () => {
     })
   });
 
-  let result = await response.json();
-  // allTasks = result.data;
-  console.log('result', result);
+  const result = await response.json();
+  allTasks = result.data;
   localStorage.setItem('tasks', JSON.stringify(allTasks));
   valueInput = '';
   input.value = '';
@@ -83,7 +77,7 @@ const render = () => {
     const deleteAllButton = document.getElementById('delete-all');
 
     deleteButton.addEventListener("click", () => {
-      onClickDeleteButton(index);
+      onClickDeleteButton(index, item.id);
     });
 
     editButton.addEventListener('click', () => {
@@ -113,17 +107,20 @@ const render = () => {
   });
 }
 
-const onClickDeleteButton = (index) => {
+const onClickDeleteButton = async (index, id) => {
   allTasks.splice(index, 1);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
-
+  const response = await fetch(`http://localhost:8000/deleteTask?id=${id}`, {
+    method: 'DELETE',
+  });
+  const result = await response.json();
+  allTasks = result.data;
   render();
 };
 
-const onClickDeleteAll = () => {
+const onClickDeleteAll = async () => {
   allTasks.splice(0, allTasks.length);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
-
   render();
 }
 

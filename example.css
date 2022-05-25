@@ -1,0 +1,169 @@
+/* #00E0B3 */
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=Permanent+Marker&display=swap');
+
+.main-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.back-pic1 {
+  position: fixed;
+  width: 90%;
+  height: 40vw;
+  bottom: 1vw;
+  right: 35vw;
+  z-index: -1;
+}
+
+.back-pic2 {
+  position: fixed;
+  width: 90%;
+  height: 40vw;
+  bottom: 1vw;
+  left: 35vw;
+  z-index: -1;
+}
+
+.main-elements-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.inputer {
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+}
+
+.add {
+  margin: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 25px;
+  font-size: 16px;
+  color: crimson;
+  border: 1px solid crimson;
+  background-color: rgb(255, 255, 255);
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+#delete-all {
+  margin: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 25px;
+  font-size: 16px;
+  color: crimson;
+  border: 1px solid crimson;
+  background-color: rgb(255, 255, 255);
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+#delete-all:hover {
+  cursor: pointer;
+  background-color: crimson;
+  color:rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255);
+}
+
+.add:hover {
+  cursor: pointer;
+  background-color: crimson;
+  color:rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255);
+}
+
+input[type='text'] {
+  border: 1px solid crimson;
+  border-radius: 25px;
+  height: 25px;
+  font-size: 16px;
+}
+
+input[type='text']:focus {
+  outline: none !important;
+  border: 3px solid crimson;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#content-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 70%;
+  background-color:rgb(250, 235, 215, 0.6);
+  border-radius: 25px;
+  flex-wrap: wrap;
+  font-family: 'BIZ UDPGothic', sans-serif;
+  font-weight: bold;
+}
+
+.task-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  border-bottom: 1px solid black;
+  flex-wrap: wrap;
+}
+
+.text-task {
+  display: flex;
+  font-size: 24px;
+  color: black;
+  margin-right: 8px;
+  flex-wrap: wrap;
+}
+
+.done-text {
+  display: flex;
+  font-size: 24px;
+  color: rgb(0, 0, 0, 0.6);
+  text-decoration: line-through;
+  flex-wrap: wrap;
+}
+
+input[type='checkbox'] {
+  width: 26px;
+  height: 26px;
+}
+
+.imgs {
+  width: 28px;
+  height: 28px;
+}
+
+.buttons {
+  border: none;
+  background-color:rgb(250, 235, 215, 0.2);
+  width: 32px;
+  height: 32px;
+}
+
+.buttons:hover {
+  cursor: pointer;
+}
+
+del {
+  color: red;
+}
+
+.non-visible {
+  display: none;
+}

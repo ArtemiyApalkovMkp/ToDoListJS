@@ -2,19 +2,39 @@ let allTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let valueInput = '';
 let input = null;
 
-window.onload = init = () => {
+window.onload = init = async () => {
   input = document.getElementById('add-task');
   input.addEventListener('change', updateValue);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
+  const response = await fetch('http://localhost:8000/allTasks', {
+    method: 'GET',
+  });
+  let result = await response.json();
+  allTasks = result.data;
   render();
-  const tasks = JSON.parse(localStorage.getItem('tasks'));
 };
 
-const onClickButton = () => {
+const onClickButton = async () => {
   allTasks.push({
     text: valueInput,
     isCheck: false,
-  })
+  });
+
+  const response = await fetch('http://localhost:8000/createTask', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json;charset=utf-8',
+      'Access-control-Allow-Origin': '*'
+    },
+    body: JSON.stringify({
+      text: valueInput,
+      isCheck: false
+    })
+  });
+
+  let result = await response.json();
+  // allTasks = result.data;
+  console.log('result', result);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
   valueInput = '';
   input.value = '';

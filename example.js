@@ -77,11 +77,11 @@ const render = () => {
     const deleteAllButton = document.getElementById('delete-all');
 
     deleteButton.addEventListener("click", () => {
-      onClickDeleteButton(index, item.id);
+      onClickDeleteButton(index, item._id);
     });
 
     editButton.addEventListener('click', () => {
-      onClickEditButton(index, item.id);
+      onClickEditButton(index, item._id);
     })
 
     deleteAllButton.addEventListener('click', onClickDeleteAll);
@@ -110,7 +110,7 @@ const render = () => {
 const onClickDeleteButton = async (index, id) => {
   allTasks.splice(index, 1);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
-  const response = await fetch(`http://localhost:8000/deleteTask?id=${id}`, {
+  const response = await fetch(`http://localhost:8000/deleteTask?_id=${id}`, {
     method: 'DELETE',
   });
   const result = await response.json();

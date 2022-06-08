@@ -9,8 +9,9 @@ window.onload = init = async () => {
   const response = await fetch('http://localhost:8000/allTasks', {
     method: 'GET',
   });
-  let result = await response.json();
+  const result = await response.json();
   allTasks = result.data;
+  console.log(result);
   render();
 };
 
@@ -28,7 +29,7 @@ const onClickButton = async () => {
   });
 
   const result = await response.json();
-  allTasks = result.data;
+  allTasks.push(result.data);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
   valueInput = '';
   input.value = '';
@@ -114,7 +115,14 @@ const onClickDeleteButton = async (index, id) => {
     method: 'DELETE',
   });
   const result = await response.json();
-  allTasks = result.data;
+  
+  if (result.message === 'OK') {
+    const response = await fetch('http://localhost:8000/allTasks', {
+    method: 'GET',
+  });
+    console.log('worked');
+  }
+  
   render();
 };
 
@@ -164,7 +172,7 @@ const onClickEditButton = (index, id) => {
     editBlock.remove();
     hidenBlock.style.display = '';
 
-    const response = await fetch(`http://localhost:8000/updateTask`, {
+    let response = await fetch(`http://localhost:8000/updateTask`, {
       method: 'PATCH',
       headers: {
         'Content-type': 'application/json;charset=utf-8',
@@ -173,10 +181,18 @@ const onClickEditButton = (index, id) => {
       body: JSON.stringify({
         text: editTextField.value,
         isCheck: false,
-        id
+        _id: allTasks[index]._id
       })
     });
-    const result = await response.json();
+    let result = await response.json();
+    console.log('res', result);
+    allTasks = allTasks.map((el) => el._id !== result._id ? el : result);
+    console.log(allTasks);
+
+    response = await fetch(`http://localhost:8000/allTasks`, {
+      method: 'GET'
+    })
+    result = await response.json();
     allTasks = result.data;
 
     render();

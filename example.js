@@ -11,7 +11,6 @@ window.onload = init = async () => {
   });
   const result = await response.json();
   allTasks = result.data;
-  console.log(result);
   render();
 };
 
@@ -120,7 +119,6 @@ const onClickDeleteButton = async (index, id) => {
     const response = await fetch('http://localhost:8000/allTasks', {
     method: 'GET',
   });
-    console.log('worked');
   }
   
   render();
@@ -185,9 +183,7 @@ const onClickEditButton = (index, id) => {
       })
     });
     let result = await response.json();
-    console.log('res', result);
     allTasks = allTasks.map((el) => el._id !== result._id ? el : result);
-    console.log(allTasks);
 
     response = await fetch(`http://localhost:8000/allTasks`, {
       method: 'GET'

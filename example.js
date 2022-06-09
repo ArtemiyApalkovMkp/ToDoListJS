@@ -2,11 +2,13 @@ let allTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let valueInput = '';
 let input = null;
 
+const link = 'http://localhost:8080';
+
 window.onload = init = async () => {
   input = document.getElementById('add-task');
   input.addEventListener('change', updateValue);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
-  const response = await fetch('http://localhost:8000/allTasks', {
+  const response = await fetch(`${link}/allTasks`, {
     method: 'GET',
   });
   const result = await response.json();
@@ -15,7 +17,7 @@ window.onload = init = async () => {
 };
 
 const onClickButton = async () => {
-  const response = await fetch('http://localhost:8000/createTask', {
+  const response = await fetch(`${link}/createTask`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json;charset=utf-8',
@@ -110,13 +112,13 @@ const render = () => {
 const onClickDeleteButton = async (index, id) => {
   allTasks.splice(index, 1);
   localStorage.setItem('tasks', JSON.stringify(allTasks));
-  const response = await fetch(`http://localhost:8000/deleteTask?_id=${id}`, {
+  const response = await fetch(`${link}/deleteTask?_id=${id}`, {
     method: 'DELETE',
   });
   const result = await response.json();
   
   if (result.message === 'OK') {
-    const response = await fetch('http://localhost:8000/allTasks', {
+    const response = await fetch(`${link}/allTasks`, {
     method: 'GET',
   });
   }
@@ -170,7 +172,7 @@ const onClickEditButton = (index, id) => {
     editBlock.remove();
     hidenBlock.style.display = '';
 
-    let response = await fetch(`http://localhost:8000/updateTask`, {
+    let response = await fetch(`${link}/updateTask`, {
       method: 'PATCH',
       headers: {
         'Content-type': 'application/json;charset=utf-8',
@@ -185,7 +187,7 @@ const onClickEditButton = (index, id) => {
     let result = await response.json();
     allTasks = allTasks.map((el) => el._id !== result._id ? el : result);
 
-    response = await fetch(`http://localhost:8000/allTasks`, {
+    response = await fetch(`${link}/allTasks`, {
       method: 'GET'
     })
     result = await response.json();
